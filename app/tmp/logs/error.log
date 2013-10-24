@@ -300,3 +300,13 @@ Request URL: /nfq/css/cake.generic.css
 Stack Trace:
 #0 D:\wamp\www\nfq\app\webroot\index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
 #1 {main}
+2013-10-24 07:59:57 Error: Fatal Error (4): syntax error, unexpected T_PRIVATE in [D:\wamp\www\nfq\app\Controller\AppController.php, line 58]
+2013-10-24 07:59:57 Error: [FatalErrorException] syntax error, unexpected T_PRIVATE
+Request URL: /nfq/
+Stack Trace:
+#0 D:\wamp\www\nfq\lib\Cake\Error\ErrorHandler.php(205): ErrorHandler::handleFatalError(4, 'syntax error, u...', 'D:\wamp\www\nfq...', 58)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', 'D:\wamp\www\nfq...', 58, Array)
+#2 D:\wamp\www\nfq\lib\Cake\Core\App.php(931): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', 'D:\wamp\www\nfq...', 58, Array)
+#3 D:\wamp\www\nfq\lib\Cake\Core\App.php(904): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}

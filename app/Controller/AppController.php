@@ -3,12 +3,12 @@ App::uses('Controller', 'Controller');
 
 class AppController extends Controller {
 
-	public $components = array('Auth' => array('authorize' => 'Controller'), 'Cookie', 'RequestHandler','Session');
+	// public $components = array('Auth' => array('authorize' => 'Controller'), 'Cookie', 'RequestHandler','Session');
 	public $basic;
 	public $paginate = array(
 		'maxLimit' => 100000
 	);
-	public function isAuthorized($user = null) {
+	/*public function isAuthorized($user = null) {
         // Any registered user can access public functions
         if (empty($this->request->params['admin'])) {
 			$this->set('admin_menu', true);
@@ -21,13 +21,13 @@ class AppController extends Controller {
         }
         // Default deny
         return false;
-    }
+    }*/
 	public function beforeFilter() {
-		if ((isset($this->request->params['prefix'])) && ($this->request->params['prefix'])) {
-            $this->layout = 'admin';
-		}
-		else 
-			$this->Auth->allow('*');
+		// if ((isset($this->request->params['prefix'])) && ($this->request->params['prefix'])) {
+            // $this->layout = 'admin';
+		// }
+		// else 
+			// $this->Auth->allow('*');
 		if($this->name == 'CakeError') {
 			$this->layout = 'error';
 			$this->view = 'errors/missing_controller.ctp';
