@@ -26,7 +26,7 @@
 		}
 		public function getMenuItems($name = null){
 			if($name){
-				$rawdata = $this->MenuItem->getMenuPages($name);
+				$data = $this->MenuItem->getMenuPages($name);
 				return $data;
 			}else{
 				return false;
