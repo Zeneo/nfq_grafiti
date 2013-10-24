@@ -105,5 +105,8 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapclass development php framew
 			<div class="ft_r">&nbsp;</div>
 		</div>
 	</div>
+	<?php
+		echo $this->Html->script('nivo');
+	?>
 </body>
 </html>
