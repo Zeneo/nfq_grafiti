@@ -1,0 +1,33 @@
+h1, h2, h3, h4, h5, h6, b, li, div, p, a, span{
+	font-family: "Minion Pro";
+	color: #fff;
+	font-weight: normal;
+}
+h1{
+    font-size: 36px;
+	line-height: 38px;
+}
+h2{
+    font-size: 28px;
+	line-height: 32px;
+}
+h3{
+    font-size: 18px;
+	line-height: 20px;
+}
+h4{
+    font-size: 14px;
+	line-height: 15px;
+}
+h5{
+    font-size: 12px;
+	line-height: 14px;
+}
+h6{
+    font-size: 10px;
+	line-height: 12px;
+}
+b, li, div, p, a, span{
+	font-size: 14px;
+	line-height: 16px;
+}

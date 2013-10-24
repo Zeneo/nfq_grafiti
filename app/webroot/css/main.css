@@ -1,0 +1,215 @@
+@charset "utf-8";
+@font-face {
+    font-family: 'most_waztedregular';
+    src: url('../fonts/mostwasted-webfont.eot');
+    src: url('../fonts/mostwasted-webfont.eot?.iefix') format('embedded-opentype'),
+         url('../fonts/mostwasted-webfont.woff') format('woff'),
+         url('../fonts/mostwasted-webfont.ttf') format('truetype'),
+         url('../fonts/mostwasted-webfont.svg.most_waztedregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'bankgothic_lt_btlight';
+    src: url('../fonts/bgothl-webfont.eot');
+    src: url('../fonts/bgothl-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/bgothl-webfont.woff') format('woff'),
+         url('../fonts/bgothl-webfont.ttf') format('truetype'),
+         url('../fonts/bgothl-webfont.svg#bankgothic_lt_btlight') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+/*  ====   Main ================================================================*/
+body{
+	margin: 0;
+	padding: 0;
+	background: url('../img/background.jpg') #120d09 repeat-x top center ;
+}
+.no-float{
+	clear: both;
+}
+.container{
+	width: 100%;
+	min-height: 500px;
+	position: relative;
+}
+.main{
+	position: relative;
+	width: 960px;
+	margin: 0 auto;
+	z-index: 10;
+}
+.content{
+	z-index: 10;
+	position: relative;
+	min-height: 250px;
+}
+/*  ====   Top   =================================================================*/
+.top{
+	height: 160px;
+	width: 100%;
+	position: relative;
+	z-index: 11;
+}
+.login_cnt1{
+	height: 110px;
+}
+.login_cnt2{
+	position: relative;
+	float: right;
+}
+.login_cnt3{
+	background-color:rgba(0,0,0,0.5);
+	border-radius: 0 0 8px 8px;
+	padding: 8px;
+}
+.login_menu_invisible{
+	visibility: hidden;
+	
+}
+.login_light{
+	position: absolute;
+	top:  -20px;
+	right: 0;
+	z-index: 15;
+	height: 109px;
+	width: 250px;
+	display: none;
+	background: url('../img/login_light.png') no-repeat center top;
+}
+.login_menu2{
+	z-index: 20;
+	position: relative;
+	color: #fff;
+	top: -24px;
+	right: 8px;
+	
+}
+.login_menu2 a, .login_menu_invisible a{
+	text-decoration: none;
+	padding-left: 20px;
+	font-family: "bankgothic_lt_btlight";
+	font-size: 14px;
+	color: #fff;
+}
+#register{
+	display: inline-block;
+	float: right;
+	background: url('../img/register.png') no-repeat left center;
+}
+#login{
+	display: inline-block;
+	float: right;
+	background: url('../img/login.png') no-repeat left center;
+	margin-right: 20px;
+}
+.main_menu_l{
+	background: url('../img/ft_l.png') no-repeat left bottom;
+	height: 35px;
+	width: 31px;
+	float: left;
+}
+.main_menu_cnt2{
+	background: url('../img/ft_c.png') repeat-x bottom;
+	min-width: 300px;
+	height: 35px;
+	float: left;
+}
+.main_menu_r{
+	background: url('../img/ft_r.png') no-repeat left bottom;
+	height: 35px;
+	width: 31px;
+	float: left;
+}
+.main_menu{
+	list-style: none;
+	margin: 5px 0 0 60px;
+	padding: 0;
+	font-family: 'most_waztedregular';
+}
+.main_menu li{
+	display:  inline-block;
+	padding-left: 20px;
+}
+.main_menu li, .main_menu li a{
+	font-family: 'most_waztedregular';
+	color: #fff;
+	font-size: 34px;
+	text-decoration: none;
+	 text-shadow:
+   -2px -2px 0 #000,  
+    2px -2px 0 #000,
+    -2px 2px 0 #000,
+     2px 2px 0 #000;
+	 -webkit-text-stroke: 3px black;
+}
+/*  ====   Lamp   ===============================================================*/
+.lamp{
+	position: absolute;
+	z-index: 5;
+	top: 0;
+	left: 23px;
+}
+
+.lamp_on{
+	background: url('../img/lamp_on.png') no-repeat center top;
+	height: 331px;
+	width: 354px;
+	position: absolute;
+	z-index: 1;
+	top: 0;
+	left: 5px;
+	
+}
+.lamp_off{
+	background: url('../img/lamp_off.png') no-repeat center top;
+	height: 139px;
+	width: 120px;
+	position: absolute;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	display: none;
+}
+/*  ====   Footer   ==============================================================*/
+.footer{
+	margin-top: 20px;
+	width: 960px;
+	margin: 0 auto;
+}
+.ft_l{
+	background: url('../img/ft_l.png') no-repeat right bottom;
+	height: 30px;
+	width: 31px;
+	margin-left: 72px;
+	float: left;
+}
+.ft_cnt{
+	background: url('../img/ft_c.png') repeat-x bottom;
+	width: 790px;
+	height: 30px;
+	float: left;
+}
+.ft_menu{
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.ft_menu li{
+	display: inline-block;
+	padding-right: 20px;
+	font-family: "bankgothic_lt_btlight";
+}
+.ft_menu li a{
+	font-family: "bankgothic_lt_btlight";
+}
+.rights{
+	float: right;
+}
+.ft_r{
+	background: url('../img/ft_r.png') no-repeat left bottom;
+	height: 30px;
+	width: 31px;
+	float: left;
+}
