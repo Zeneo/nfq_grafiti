@@ -1,34 +1,14 @@
-<?php
-/**
- *
- * PHP 5
- *
- * CakePHP(tm) : Rapclass Development Framework (http://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
- *
- * Licensed under The MIT License
- * For full copyright and license information, please see the LICENSE.txt
- * Redistributions of files must retain the above copyright notice.
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
- * @link          http://cakephp.org CakePHP(tm) Project
- * @package       app.View.Layouts
- * @since         CakePHP(tm) v 0.10.0.1076
- * @license       http://www.opensource.org/licenses/mit-license.php MIT License
- */
-
-$cakeDescription = __d('cake_dev', 'CakePHP: the rapclass development php framework');
-?>
 <!DOCTYPE html>
 <html>
 <head>
 	<?php echo $this->Html->charset(); ?>
 	<title>
-		<?php echo $basic['title']; ?>
+		<?php echo $basic['site_title']; ?>
 	</title>
 	<?php
+	
 		echo $this->Html->meta('icon');
-		echo $this->Html->css(array('basic', 'main'));
+		echo $this->Html->css(array('basic', 'main', 'slider'));
 	?>
 </head>
 <body>
@@ -40,32 +20,68 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapclass development php framew
 			</div>
 			<div class="top">
 				<div class="login_cnt1">
+					<?php if(!$logged){ ?>
 					<div class="login_cnt2">
 						<div class="login_cnt3">
 							<div class="login_menu_invisible">
-								<a id="register" href="#">Registracija</a>
-								<a id="login" href="#">Prisijungti</a>
+								<div class="login_form">
+									<?php echo $this->Form->create('User', array('url' => array('controller' => 'users', 'action' => 'login'))); ?>
+									<?php echo $this->Form->input('username', array('label' => 'Vartoto vardas')); ?>
+									<?php echo $this->Form->input('password', array('label' => 'Slaptazodis')); ?>
+									<?php echo $this->Form->end(); ?>
+								</div>
+								<a class="register" href="#">Registracija</a>
+								<a class="login" href="#">Prisijungti</a>
 								<div class="no-float"></div>
 							</div>
 						</div>
 						<div class="login_light">
-				
 						</div>
 						<div class="login_menu2">
-							<a id="register" href="#">Registracija</a>
-							<a id="login" href="#">Prisijungti</a>
+							<a class="register" href="#">Registracija</a>
+							<a class="login" href="#">Prisijungti</a>
 						</div>
 					</div>
+					<?php }else{ ?>
+						<div class="login_cnt2">
+						<div class="login_cnt3">
+							<div class="login_menu_invisible">
+								<?php echo $this->Html->link($user, array('controller' => 'users', 'action' => 'logout'), array('class' => 'logged'));?>
+								<div class="no-float"></div>
+							</div>
+						</div>
+						<div class="login_light">
+						</div>
+						<div class="login_menu2">
+							<?php echo $this->Html->link($user, array('controller' => 'users', 'action' => 'logout'), array('class' => 'logged'));?>
+						</div>
+					</div>
+					<?php } ?>
 				</div>
 				<div class="main_menu_cnt1">
 					<div class="main_menu_l"></div>
 					<div class="main_menu_cnt2">
-					<ul class="main_menu">
-						<li><a href="#">Pagrindinis</a></li>
-						<li><a href="#">Galerija</a></li>
-						<li><a href="#">Naujienos</a></li>
-						<li><a href="#">Renginiai</a></li>
-					</ul>					
+					<?php if(!empty($topmenu) && isset($topmenu)){ ?>
+						<ul class="main_menu">
+							<?php foreach($topmenu as $item){
+								if($item['MenuItem']['active']){
+									if($item['MenuItem']['module']){
+										echo '<li>'.$this->Html->link($item['MenuItem']['title'], array('controller' => $item['MenuItem']['module'], 'action' => $item['MenuItem']['alias'])).'</li>';
+									}elseif($item['MenuItem']['url']){
+										echo '<li>'.$this->Html->link($item['MenuItem']['title'], $item['MenuItem']['url']).'</li>';
+									}else{
+										echo '<li>'.$item['MenuItem']['title'].'</li>';
+									}
+								}else{
+									echo '<li>'.$this->Html->link($item['MenuItem']['title'], '#').'</li>';
+								}
+							 } 
+							 if($logged){
+								echo '<li>'.$this->Html->link('Mano galerija', array('controller' => 'galleries', 'action' => 'user_gallery'), array('class' => 'logged')) .'<li>';
+							 }
+							 ?>
+						</ul>
+					<?php } ?>					
 					</div>
 					<div class="main_menu_r"></div>
 				</div>
@@ -78,35 +94,36 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapclass development php framew
 		<div class="footer">
 			<div class="ft_l">&nbsp;</div>
 			<div class="ft_cnt">
-				
+				<?php if(!empty($footermenu) && isset($footermenu)){ ?>          
 					<ul class="ft_menu">
-					<li>Apie mus</li>
-					<li>Kontaktai</li>
-					<li class="rights">2013 Paulius Navickas. Visos teises saugomos</li>
-					<?php 
-				if(!empty($ft_menu) && isset($ft_menu)){ ?>          //Kol nera sukurtas pats listas
-					<?php foreach($ft_menu as $menuitem){ ?>
-						<li>
+					<?php foreach($footermenu as $item){ ?>
 							<?php 
-							if(isset($menuitem['MenuItem']['module']) && !empty($menuitem['MenuItem']['module'])){
-								echo  $this->Html->link($menuitem['MenuItem']['title'], '/'.Configure::read('Config.languageSite').'/'.$menuitem['MenuItem']['module'].'/'.$menuitem['MenuItem']['alias']);
-							}
-							elseif($menuitem['MenuItem']['url']!=null && isset($menuitem['MenuItem']['url'])){
-								echo $this->Html->link($menuitem['MenuItem']['title'], $menuitem['MenuItem']['url']); 
+							if($item['MenuItem']['active']){
+								if(isset($item['MenuItem']['module']) && !empty($item['MenuItem']['module'])){
+									if($item['MenuItem']['module'] == 'rights'){
+										echo  '<li class="rights">'.$item['MenuItem']['title'].'</li>';
+									}else{
+										echo  '<li>'.$this->Html->link($item['MenuItem']['title'], '/'.$item['MenuItem']['module'].'/'.$item['MenuItem']['alias']).'</li>';
+									}
+								}
+								elseif($item['MenuItem']['url']!=null && isset($item['MenuItem']['url'])){
+									echo '<li>'.$this->Html->link($item['MenuItem']['title'], $item['MenuItem']['url']).'</li>'; 
+								}else{
+									echo '<li>'.$item['MenuItem']['title'].'</li>';
+								}
 							}else{
-								echo $menuitem['MenuItem']['title'];
+								echo '<li>'.$this->Html->link($item['MenuItem']['title'], '#').'</li>';
 							}
 							?>
-						</li>	
 					<?php }?>
-				<?php } ?>
 					</ul>
+				<?php } ?>
 			</div>
 			<div class="ft_r">&nbsp;</div>
 		</div>
 	</div>
 	<?php
-		echo $this->Html->script('nivo');
+		echo $this->Html->script(array('jquery', 'js','bxslider.min'));
 	?>
 </body>
 </html>

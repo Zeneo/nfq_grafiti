@@ -3,31 +3,31 @@ App::uses('Controller', 'Controller');
 
 class AppController extends Controller {
 
-	// public $components = array('Auth' => array('authorize' => 'Controller'), 'Cookie', 'RequestHandler','Session');
+	public $components = array('Auth' => array('authorize' => 'Controller'), 'Cookie', 'RequestHandler','Session');
+	// public $components = array('Cookie', 'RequestHandler','Session');
 	public $basic;
+	public $helpers = array('Form');
 	public $paginate = array(
 		'maxLimit' => 100000
 	);
-	/*public function isAuthorized($user = null) {
+	public function isAuthorized($user = null) {
         // Any registered user can access public functions
         if (empty($this->request->params['admin'])) {
-			$this->set('admin_menu', true);
             return true;
         }
         // Only admins can access admin functions
         if (isset($this->request->params['admin'])) {
-			$this->set('admin_menu', true);
-            return (bool)($user['status'] === 'active');
+            return false;
         }
         // Default deny
         return false;
-    }*/
+    }
 	public function beforeFilter() {
 		// if ((isset($this->request->params['prefix'])) && ($this->request->params['prefix'])) {
-            // $this->layout = 'admin';
+			// $this->layout = 'admin';
 		// }
 		// else 
-			// $this->Auth->allow('*');
+			$this->Auth->allow('*');
 		if($this->name == 'CakeError') {
 			$this->layout = 'error';
 			$this->view = 'errors/missing_controller.ctp';
@@ -38,6 +38,13 @@ class AppController extends Controller {
 			$this->basic = $basic;
 			$this->set('basic', $basic['Basic']);
 		}else{
+			if($this->Session->read('logged')){
+				$user = $this->Session->read("Auth.User");
+				$this->set('user', $user['username']);
+				$this->set('logged', true);
+			}else{
+				$this->set('logged', false);
+			}
 			$this->set('base_url', 'http://'.$_SERVER['SERVER_NAME']);
 			$this->set('full_url', $this->selfURL());
 			$this->loadModel('Basic');
@@ -49,8 +56,6 @@ class AppController extends Controller {
 			$this->loadModel('Menu');
 			$topmenu = $this->Menu->getMenuItems('topmenu');
 			$this->set('topmenu', $topmenu);
-			$usermenu = $this->Menu->getMenuItems('usermenu');
-			$this->set('usermenu', $usermenu);
 			$footermenu = $this->Menu->getMenuItems('footermenu');
 			$this->set('footermenu', $footermenu);
 		}

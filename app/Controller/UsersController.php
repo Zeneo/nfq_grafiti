@@ -3,17 +3,51 @@
 class UsersController extends AppController {
 	
     public $name = 'Users';
-
+	// public $validate = array(
+        // 'username' => array(
+            // 'required' => array(
+                // 'rule' => array('notEmpty'),
+                // 'message' => 'A username is required'
+            // )
+        // ),
+        // 'password' => array(
+            // 'required' => array(
+                // 'rule' => array('notEmpty'),
+                // 'message' => 'A password is required'
+            // )
+        // ),
+        // 'role' => array(
+            // 'valid' => array(
+                // 'rule' => array('inList', array('admin', 'author')),
+                // 'message' => 'Please enter a valid role',
+                // 'allowEmpty' => false
+            // )
+        // )
+    // );
     public function beforeFilter() {
-		$this->Auth->allow('admin_login');
-        parent::beforeFilter();
+		$this->Auth->allow('login', 'logout', 'index');
+		if($this->Security && $this->action == 'checkjson'){
+			$this->Security->validatePost = false;
+			$this->Security->csrfCheck = false;
+		}
     }
 
     public function index() {
 		$this->redirect("/");
     }
 	public function login() {
-		$this->redirect("/");
+		 if (!empty($this->request->data) && $this->request->is('ajax')) {
+            if ($this->Auth->login()) {
+                $this->set('err', false);
+				$this->Session->write('logged', true);
+            } else {
+				$this->layout = 'ajax';
+                $this->set('err', true);
+				$this->set('data', $this->request->data);
+            }
+        }else{
+			$this->redirect("/");
+		}
 	}
 	
     public function admin_edit($id = null) {
@@ -33,6 +67,7 @@ class UsersController extends AppController {
     }
     public function logout() {
 		if($this->Auth->logout()){
+			$this->Session->delete('logged');
 			$this->redirect($this->Auth->redirect());
 		}
     }

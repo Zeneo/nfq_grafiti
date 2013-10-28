@@ -1,0 +1,5 @@
+DB config file: app\Config\database.php
+User login info: zee/labas
+SQL failus rasite SQl kataloge
+
+Sviestuvo sumirgejimas reikia planuojama, bet dar nepadaryta puslapi.

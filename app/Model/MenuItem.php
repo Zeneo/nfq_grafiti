@@ -3,12 +3,11 @@
 
 	public $belongsTo = 'Menu';
 	
-	public function getMenuPages($name = null, $lang = null){
+	public function getMenuPages($name = null){
 		$options=array(
 			'conditions' => array(
 				'Menu.name' => $name,
 				'Menu.published' => 1,
-				'MenuItem.language'=> $lang,
 				'MenuItem.published'=> 1
 			),
 			'order' => 	'MenuItem.order ASC'
